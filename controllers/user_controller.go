@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"diskha-test/repositories"
-	"diskha-test/services"
+	"edot-test/repositories"
+	"edot-test/services"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"time"

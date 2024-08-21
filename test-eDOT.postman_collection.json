@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "1c4dd6ff-f953-4900-9329-1249f8772c7e",
-		"name": "diksha-test",
+		"name": "test-eDOT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14665669"
 	},
@@ -944,7 +944,7 @@
 		{
 			"name": "Checkout Order",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -953,36 +953,358 @@
 						"disabled": true
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userPubId\": \"7f8fa80d-0465-47cb-9458-73992cf2e341\",\n    \"product\": [\n        {\n            \"productPubId\": \"d6219f47-587b-4719-a585-2627f713012d\",\n            \"qty\": 8\n        },{\n            \"productPubId\": \"e02deae4-7fd4-47b4-8e1c-b07e05d432b2\",\n            \"qty\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:20000/1.0/products?page=0&size=2&order=code&sort=ASC&keyword=shampoo",
+					"raw": "localhost:20000/1.0/orders/checkout",
 					"host": [
 						"localhost"
 					],
 					"port": "20000",
 					"path": [
 						"1.0",
-						"products"
+						"orders",
+						"checkout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Flow",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mdn\": \"6281787765454\",\n    \"password\": \"123abc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/1.0/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"1.0",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "335"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "beegoServer:1.12.3"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 02 Feb 2024 16:21:05 GMT"
+						}
 					],
-					"query": [
+					"cookie": [],
+					"body": "{\n    \"content\": {\n        \"userPubId\": \"7f8fa80d-0465-47cb-9458-73992cf2e341\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY5NzcyNjUsInVzZXJuYW1lIjoiNjI4MTc4Nzc2NTQ1NCJ9.cry29CX0UJmLDLyNBRCIRV991ejhIX4pPhxK_35Xt_8\",\n        \"expireToken\": 1706977265\n    },\n    \"successMessage\": \"Success\",\n    \"code\": 200,\n    \"errorMessage\": \"\"\n}"
+				},
+				{
+					"name": "User Not Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mdn\": \"6281787765450\",\n    \"password\": \"123abc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/1.0/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"1.0",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
 						{
-							"key": "page",
-							"value": "0"
+							"key": "Content-Length",
+							"value": "96"
 						},
 						{
-							"key": "size",
-							"value": "2"
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
 						},
 						{
-							"key": "order",
-							"value": "code"
+							"key": "Server",
+							"value": "beegoServer:1.12.3"
 						},
 						{
-							"key": "sort",
-							"value": "ASC"
+							"key": "Date",
+							"value": "Fri, 02 Feb 2024 16:27:10 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": null,\n    \"successMessage\": \"\",\n    \"code\": 404,\n    \"errorMessage\": \"User Not Found\"\n}"
+				},
+				{
+					"name": "Incorrect Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mdn\": \"6281787765454\",\n    \"password\": \"123abcd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/1.0/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"1.0",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "100"
 						},
 						{
-							"key": "keyword",
-							"value": "shampoo"
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "beegoServer:1.12.3"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 02 Feb 2024 16:27:36 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": null,\n    \"successMessage\": \"\",\n    \"code\": 407,\n    \"errorMessage\": \"Incorrect Password\"\n}"
+				},
+				{
+					"name": "Error System",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mdn\": \"6281787765454\",\n    \"password\": \"123abc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/1.0/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"1.0",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "115"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "beegoServer:1.12.3"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 02 Feb 2024 16:29:13 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": null,\n    \"successMessage\": \"\",\n    \"code\": 508,\n    \"errorMessage\": \"Don't worry, we are handling this\"\n}"
+				},
+				{
+					"name": "Max Enter Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mdn\": \"6281787765454\",\n    \"password\": \"123abcs\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/1.0/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"1.0",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "131"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "beegoServer:1.12.3"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 03 Feb 2024 00:56:03 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": null,\n    \"successMessage\": \"\",\n    \"code\": 408,\n    \"errorMessage\": \"You have reached the maximum password input limit\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Confirm Order",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userPubId\": \"7f8fa80d-0465-47cb-9458-73992cf2e341\",\n    \"product\": [\n        {\n            \"productPubId\": \"d6219f47-587b-4719-a585-2627f713012d\",\n            \"qty\": 8\n        },{\n            \"productPubId\": \"e02deae4-7fd4-47b4-8e1c-b07e05d432b2\",\n            \"qty\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:20000/1.0/orders/:pubid/confirm",
+					"host": [
+						"localhost"
+					],
+					"port": "20000",
+					"path": [
+						"1.0",
+						"orders",
+						":pubid",
+						"confirm"
+					],
+					"variable": [
+						{
+							"key": "pubid",
+							"value": "f1c9d1d4-fd69-4cb2-83c7-a44342df33ad"
 						}
 					]
 				}

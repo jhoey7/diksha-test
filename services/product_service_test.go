@@ -1,8 +1,8 @@
 package services
 
 import (
-	"diskha-test/models"
-	"diskha-test/utils"
+	"edot-test/models"
+	"edot-test/utils"
 	"errors"
 	"testing"
 )

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"diskha-test/models"
-	"diskha-test/utils"
+	"edot-test/models"
+	"edot-test/utils"
 	"encoding/json"
 	"github.com/astaxie/beego/logs"
 	goValidator "github.com/go-playground/validator/v10"

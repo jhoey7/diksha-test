@@ -1,7 +1,7 @@
 package models
 
 import (
-	"diskha-test/utils"
+	"edot-test/utils"
 	"time"
 )
 

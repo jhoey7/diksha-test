@@ -1,8 +1,8 @@
 package services
 
 import (
-	"diskha-test/models"
-	"diskha-test/utils"
+	"edot-test/models"
+	"edot-test/utils"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"

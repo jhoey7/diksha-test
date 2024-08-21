@@ -1,6 +1,6 @@
 package models
 
-import "diskha-test/utils"
+import "edot-test/utils"
 
 // Response struct
 type Response struct {

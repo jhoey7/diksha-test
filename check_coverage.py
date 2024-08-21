@@ -5,7 +5,7 @@ import hashlib
 
 def check_lint():
 
-    project_name = ('diksha-test')
+    project_name = ('eDOT-test')
     env_build = project_name.split('-')[0].upper()
 
     stdoutdata = subprocess.getoutput("python3 lint.py | grep 'errors found'")
@@ -17,10 +17,10 @@ def check_lint():
         print('failed lint')
         sys.exit("result linter : " + total_error + 'failed to deploy')
 
-    job = subprocess.getoutput("go test diksha-test/... -v -cover | grep 'coverage' | grep -v 'ok' | awk '{print $2}' ")
-    job_count = subprocess.getoutput("go test diksha-test/... -v -cover | grep 'coverage' | grep -v 'ok' | wc -l")
-    job_run = subprocess.getoutput("go test diksha-test/... -v -cover | grep 'RUN' | wc -l")
-    job_pass = subprocess.getoutput("go test diksha-test/... -v -cover | grep 'PASS:' | wc -l")
+    job = subprocess.getoutput("go test eDOT-test/... -v -cover | grep 'coverage' | grep -v 'ok' | awk '{print $2}' ")
+    job_count = subprocess.getoutput("go test eDOT-test/... -v -cover | grep 'coverage' | grep -v 'ok' | wc -l")
+    job_run = subprocess.getoutput("go test eDOT-test/... -v -cover | grep 'RUN' | wc -l")
+    job_pass = subprocess.getoutput("go test eDOT-test/... -v -cover | grep 'PASS:' | wc -l")
 
     job_count = parseResult(job_count)
     job_run = parseResult(job_run)

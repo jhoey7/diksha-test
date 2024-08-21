@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"diskha-test/models"
+	"edot-test/models"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -15,12 +15,18 @@ func NewProductDetailRepository(o orm.Ormer) ProductDetailRepository {
 	return ProductDetailRepository{db: o}
 }
 
-func (repo ProductDetailRepository) FindByProductPubID(p string) ([]models.ProductDetails, error) {
+func (repo ProductDetailRepository) FindByPubIds(ids []int) ([]models.ProductDetails, error) {
 	var pd []models.ProductDetails
 
-	qs := repo.db.QueryTable("products_details")
-	qs = qs.Filter("product_pubid", p)
-	_, err := qs.All(&pd)
+	_, err := repo.db.QueryTable("products_details").
+		Filter("id__in", ids).
+		All(&pd)
 
 	return pd, err
+}
+
+// UpdateColumns function for update transaction data using certain columns
+func (repo ProductDetailRepository) UpdateColumns(p models.ProductDetails, cols ...string) error {
+	_, err := repo.db.Update(&p, cols...)
+	return err
 }

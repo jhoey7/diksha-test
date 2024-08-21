@@ -16,3 +16,31 @@ type ProductDetails struct {
 func (pd *ProductDetails) TableName() string {
 	return "products_details"
 }
+
+func (pd *ProductDetails) NewProductDetail() ProductDetails {
+	return ProductDetails{
+		ID:          pd.ID,
+		Product:     pd.Product,
+		WareHouseID: pd.WareHouseID,
+		Stock:       pd.Stock,
+		CreatedAt:   pd.CreatedAt,
+		UpdatedAt:   pd.UpdatedAt,
+	}
+}
+
+type OrderRelease struct {
+	ProductDtlID int `json:"id"`
+	Qty          int `json:"qty"`
+}
+
+type OrderReleaseQueue struct {
+	PubID string         `json:"pubID"`
+	Data  []OrderRelease `json:"orders"`
+}
+
+func NewOrderReleaseQueue(pubID string, data []OrderRelease) OrderReleaseQueue {
+	return OrderReleaseQueue{
+		PubID: pubID,
+		Data:  data,
+	}
+}

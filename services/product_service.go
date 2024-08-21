@@ -1,8 +1,8 @@
 package services
 
 import (
-	"diskha-test/models"
-	"diskha-test/utils"
+	"edot-test/models"
+	"edot-test/utils"
 	"errors"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
@@ -13,6 +13,12 @@ type ProductProcessor interface {
 	CountProductByQueryParam(req models.ProductListRequest) (int, error)
 	FindByPubID(pubID string) (product models.Products, err error)
 	UpdateColumns(p models.Products, cols ...string) error
+	FindByPubIDs(pubIDs []string) (product []models.Products, err error)
+}
+
+type ProductDetailProcessor interface {
+	UpdateColumns(p models.ProductDetails, cols ...string) error
+	FindByPubIds(ids []int) ([]models.ProductDetails, error)
 }
 
 // ProductService struct

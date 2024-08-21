@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"diskha-test/models"
+	"edot-test/models"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -15,7 +15,7 @@ func NewOrderDetailRepository(o orm.Ormer) OrderDetailRepository {
 	return OrderDetailRepository{db: o}
 }
 
-func (repo OrderDetailRepository) Insert(od models.OrdersDetail) (models.OrdersDetail, error) {
-	_, err := repo.db.Insert(&od)
-	return od, err
+func (repo OrderDetailRepository) InsertBulk(ods []models.OrdersDetail) ([]models.OrdersDetail, error) {
+	_, err := repo.db.InsertMulti(len(ods), ods)
+	return ods, err
 }

@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"diskha-test/controllers"
+	"edot-test/controllers"
 	"github.com/astaxie/beego"
 )
 
@@ -19,6 +19,7 @@ func init() {
 
 			beego.NSNamespace("/orders",
 				beego.NSRouter("/checkout", &controllers.OrderController{}, "post:Checkout"),
+				beego.NSRouter("/:pubId/confirm", &controllers.OrderController{}, "patch:Confirm"),
 			),
 		)
 

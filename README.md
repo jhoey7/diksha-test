@@ -1,4 +1,4 @@
-# diksha-test
+# eDOT-test
 
 ## Getting Started
 
@@ -98,7 +98,7 @@ Check if the project has go.mod and go.sum using New version command to build.
 
 ### Project Configuration
 
-diksha-test will first look for configuration in `{user.home}\conf\diksha-test.conf` and, when it isn't found, look in `conf/app.conf`.  __*As of this writing*__, only database configuration has been made configurable externally in `{user.home}\conf\diksha-test.conf`.
+eDOT-test will first look for configuration in `{user.home}\conf\eDOT-test.conf` and, when it isn't found, look in `conf/app.conf`.  __*As of this writing*__, only database configuration has been made configurable externally in `{user.home}\conf\eDOT-test.conf`.
 
 For development purposes, you can ideally use either dev profile or uat profile. Note that currently dev environment is not fit for use, but may well be in the near future.
 
@@ -126,13 +126,13 @@ To get started quickly with running this microservice, at least in development e
 ```shell
 $ bee run
 ```
-This will start a web server running `diksha-test` listening on port 20000.
+This will start a web server running `eDOT-test` listening on port 20000.
 
 Or you can execute file that built after execute `go build`.
 
-Execute `./diksha-test` in terminal for linux or mac.
+Execute `./eDOT-test` in terminal for linux or mac.
 
-Open `diksha-test.exe` for windows.
+Open `eDOT-test.exe` for windows.
 
 ## Running the tests and linter
 

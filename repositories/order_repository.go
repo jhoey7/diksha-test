@@ -1,9 +1,8 @@
 package repositories
 
 import (
-	"diskha-test/models"
+	"edot-test/models"
 	"github.com/astaxie/beego/orm"
-	"strconv"
 )
 
 // OrderRepository struct
@@ -22,21 +21,18 @@ func (repo OrderRepository) Insert(o models.Orders) (models.Orders, error) {
 	return o, err
 }
 
-// GetTotalQtyPendingOrderByProductPubID func for find pending total product by product pubID
-func (repo OrderRepository) GetTotalQtyPendingOrderByProductPubID(pID string) (count int, err error) {
-	sql := `
-		SELECT SUM(qty) AS qty
-		FROM orders_details od 
-		INNER JOIN orders o on o.pubid = od.order_pubid
-		INNER JOIN products p ON p.pubid = od.product_pubid 
-		WHERE o.status = 'PENDING' AND p.pubid = ?`
+func (repo OrderRepository) FindPendingOrderByPubId(pubID string) (models.Orders, error) {
+	var order models.Orders
+	err := repo.db.QueryTable("orders").
+		Filter("pubid", pubID).
+		Filter("status", "PENDING").
+		One(&order)
 
-	var rs []orm.Params
-	_, err = repo.db.Raw(sql, pID).Values(&rs)
+	return order, err
+}
 
-	if rs[0]["qty"] != nil {
-		count, _ = strconv.Atoi(rs[0]["qty"].(string))
-	}
-
-	return count, err
+// UpdateColumns function for update transaction data using certain columns
+func (repo OrderRepository) UpdateColumns(p models.Orders, cols ...string) error {
+	_, err := repo.db.Update(&p, cols...)
+	return err
 }

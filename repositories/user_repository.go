@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"diskha-test/models"
+	"edot-test/models"
 	"github.com/astaxie/beego/orm"
 )
 

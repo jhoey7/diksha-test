@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"diskha-test/models"
+	"edot-test/models"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -60,4 +60,17 @@ func (repo ProductRepository) FindByPubID(pubID string) (product models.Products
 func (repo ProductRepository) UpdateColumns(p models.Products, cols ...string) error {
 	_, err := repo.db.Update(&p, cols...)
 	return err
+}
+
+// FindByPubIDs function for find product by pubIDs.
+func (repo ProductRepository) FindByPubIDs(pubIDs []string) (products []models.Products, err error) {
+	_, err = repo.db.QueryTable("products").
+		Filter("pubid__in", pubIDs).
+		All(&products)
+
+	for i, p := range products {
+		repo.db.LoadRelated(&p, "ProductDetail")
+		products[i].ProductDetail = p.ProductDetail
+	}
+	return products, err
 }

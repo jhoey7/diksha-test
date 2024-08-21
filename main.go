@@ -1,8 +1,10 @@
 package main
 
 import (
-	"diskha-test/models"
-	_ "diskha-test/router"
+	"edot-test/models"
+	"edot-test/queue/consumer"
+	"edot-test/queue/initialize"
+	_ "edot-test/router"
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/config"
@@ -67,6 +69,11 @@ func getDatabaseConfig() (string, string, string, string, string) {
 }
 
 func main() {
+	initialize.InitRabbitConn()
+	autoConsume := beego.AppConfig.DefaultBool("startupQueueConsume", true)
+	if autoConsume {
+		consumer.StartConsumingQueue()
+	}
 	if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"

@@ -8,7 +8,6 @@ type Products struct {
 	Code          string            `orm:"column(product_code);null" json:"code"`
 	Name          string            `orm:"column(product_name);null" json:"name"`
 	Description   string            `orm:"column(product_description);null" json:"description"`
-	TotalStock    int               `orm:"column(total_stock);null" json:"totalStock"`
 	CreatedAt     time.Time         `orm:"column(created_at);null" json:"createdAt"`
 	UpdatedAt     time.Time         `orm:"column(updated_at);null" json:"updatedAt"`
 	ProductDetail []*ProductDetails `orm:"column(product_pubid);reverse(many);null" json:"details"`
